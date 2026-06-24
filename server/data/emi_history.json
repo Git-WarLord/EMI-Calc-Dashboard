@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "loanId": 8,
+    "dueDate": "2026-07-01T00:00:00.000Z",
+    "amount": "4300",
+    "status": "paid",
+    "paidDate": "2026-06-23T00:00:00.000Z",
+    "createdAt": "2026-06-23T06:19:21.390Z",
+    "updatedAt": "2026-06-23T06:19:21.390Z"
+  },
+  {
+    "id": 2,
+    "userId": 1,
+    "loanId": 6,
+    "dueDate": "2026-07-02T00:00:00.000Z",
+    "amount": "1893",
+    "status": "paid",
+    "paidDate": "2026-06-23T00:00:00.000Z",
+    "createdAt": "2026-06-23T06:19:27.258Z",
+    "updatedAt": "2026-06-23T06:19:27.258Z"
+  }
+]

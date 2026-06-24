@@ -1,0 +1,1 @@
+ALTER TABLE `loans` ADD `extraLoan` decimal(12,2) DEFAULT '0' NOT NULL;
