@@ -77,27 +77,27 @@ import initialMonthlySummaryData from "./data/monthly_summary.json";
 
 const initialMockLoans: any[] = initialMockLoansData;
 
-const mockLoans: any[] = readDataFile("loans.json", initialMockLoans).map((l: any) => ({
+let mockLoans: any[] = readDataFile("loans.json", initialMockLoans).map((l: any) => ({
   ...l,
   createdAt: new Date(l.createdAt),
   updatedAt: new Date(l.updatedAt),
 }));
 
-const mockIncome: any[] = readDataFile("income.json", initialIncomeData).map((i: any) => ({
+let mockIncome: any[] = readDataFile("income.json", initialIncomeData).map((i: any) => ({
   ...i,
   date: new Date(i.date),
   createdAt: new Date(i.createdAt),
   updatedAt: new Date(i.updatedAt),
 }));
 
-const mockExpenses: any[] = readDataFile("expenses.json", initialExpensesData).map((e: any) => ({
+let mockExpenses: any[] = readDataFile("expenses.json", initialExpensesData).map((e: any) => ({
   ...e,
   date: new Date(e.date),
   createdAt: new Date(e.createdAt),
   updatedAt: new Date(e.updatedAt),
 }));
 
-const mockEmiHistory: any[] = readDataFile("emi_history.json", initialEmiHistoryData).map((h: any) => ({
+let mockEmiHistory: any[] = readDataFile("emi_history.json", initialEmiHistoryData).map((h: any) => ({
   ...h,
   dueDate: new Date(h.dueDate),
   paidDate: h.paidDate ? new Date(h.paidDate) : null,
@@ -105,11 +105,68 @@ const mockEmiHistory: any[] = readDataFile("emi_history.json", initialEmiHistory
   updatedAt: new Date(h.updatedAt),
 }));
 
-const mockMonthlySummary: any[] = readDataFile("monthly_summary.json", initialMonthlySummaryData).map((s: any) => ({
+let mockMonthlySummary: any[] = readDataFile("monthly_summary.json", initialMonthlySummaryData).map((s: any) => ({
   ...s,
   createdAt: new Date(s.createdAt),
   updatedAt: new Date(s.updatedAt),
 }));
+
+export function getFullState() {
+  return {
+    loans: mockLoans,
+    income: mockIncome,
+    expenses: mockExpenses,
+    emiHistory: mockEmiHistory,
+    monthlySummary: mockMonthlySummary,
+  };
+}
+
+export function setFullState(state: any) {
+  if (state.loans) {
+    mockLoans = state.loans.map((l: any) => ({
+      ...l,
+      createdAt: new Date(l.createdAt),
+      updatedAt: new Date(l.updatedAt),
+    }));
+    writeDataFile("loans.json", mockLoans);
+  }
+  if (state.income) {
+    mockIncome = state.income.map((i: any) => ({
+      ...i,
+      date: new Date(i.date),
+      createdAt: new Date(i.createdAt),
+      updatedAt: new Date(i.updatedAt),
+    }));
+    writeDataFile("income.json", mockIncome);
+  }
+  if (state.expenses) {
+    mockExpenses = state.expenses.map((e: any) => ({
+      ...e,
+      date: new Date(e.date),
+      createdAt: new Date(e.createdAt),
+      updatedAt: new Date(e.updatedAt),
+    }));
+    writeDataFile("expenses.json", mockExpenses);
+  }
+  if (state.emiHistory) {
+    mockEmiHistory = state.emiHistory.map((h: any) => ({
+      ...h,
+      dueDate: new Date(h.dueDate),
+      paidDate: h.paidDate ? new Date(h.paidDate) : null,
+      createdAt: new Date(h.createdAt),
+      updatedAt: new Date(h.updatedAt),
+    }));
+    writeDataFile("emi_history.json", mockEmiHistory);
+  }
+  if (state.monthlySummary) {
+    mockMonthlySummary = state.monthlySummary.map((s: any) => ({
+      ...s,
+      createdAt: new Date(s.createdAt),
+      updatedAt: new Date(s.updatedAt),
+    }));
+    writeDataFile("monthly_summary.json", mockMonthlySummary);
+  }
+}
 
 function saveLoans() {
   writeDataFile("loans.json", mockLoans);

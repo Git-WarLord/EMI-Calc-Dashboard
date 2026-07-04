@@ -26,4 +26,17 @@ export const systemRouter = router({
         success: delivered,
       } as const;
     }),
+
+  getFullState: publicProcedure.query(async () => {
+    const { getFullState } = await import("../db");
+    return getFullState();
+  }),
+
+  syncState: publicProcedure
+    .input(z.any())
+    .mutation(async ({ input }) => {
+      const { setFullState } = await import("../db");
+      setFullState(input);
+      return { success: true };
+    }),
 });

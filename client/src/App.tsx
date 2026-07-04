@@ -95,11 +95,14 @@ function Router() {
   );
 }
 
+import { DataSync } from "./components/DataSync";
+
 function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light" switchable={true}>
         <TooltipProvider>
+          <DataSync />
           <Toaster />
           <Router />
         </TooltipProvider>

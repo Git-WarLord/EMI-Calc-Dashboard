@@ -235,6 +235,58 @@ function DashboardLayoutContent({
           </div>
 
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => {
+                const state = localStorage.getItem("emi_tracker_state");
+                if (state) {
+                  const blob = new Blob([state], { type: "application/json" });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "emi-data-backup.json";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                  URL.revokeObjectURL(url);
+                } else {
+                  alert("No data available to export yet. Try again in a few seconds.");
+                }
+              }}
+              className="h-9 w-9 flex items-center justify-center rounded-lg border border-border hover:bg-accent text-muted-foreground hover:text-foreground transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+              title="Export Data Backup"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            </button>
+            <label
+              className="h-9 w-9 flex items-center justify-center rounded-lg border border-border hover:bg-accent text-muted-foreground hover:text-foreground transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+              title="Import Data Backup"
+            >
+              <input
+                type="file"
+                accept=".json"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  const reader = new FileReader();
+                  reader.onload = (event) => {
+                    try {
+                      const data = JSON.parse(event.target?.result as string);
+                      if (data.loans) {
+                        localStorage.setItem("emi_tracker_state", JSON.stringify(data));
+                        window.location.reload();
+                      } else {
+                        alert("Invalid backup file format.");
+                      }
+                    } catch (err) {
+                      alert("Failed to parse backup file.");
+                    }
+                  };
+                  reader.readAsText(file);
+                }}
+              />
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+            </label>
             {toggleTheme && (
               <button
                 onClick={toggleTheme}
