@@ -20,8 +20,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { getLoginUrl } from "@/const";
+import { useTheme } from "../contexts/ThemeContext";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, CreditCard, DollarSign, TrendingDown, BarChart3, Target, Clock, CalendarDays, PieChart, CheckCircle2 } from "lucide-react";
+import { LayoutDashboard, LogOut, PanelLeft, CreditCard, DollarSign, TrendingDown, BarChart3, Target, Clock, CalendarDays, PieChart, CheckCircle2, Sun, Moon } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -94,6 +95,7 @@ function DashboardLayoutContent({
   const sidebarRef = useRef<HTMLDivElement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     if (isCollapsed) {
@@ -223,21 +225,33 @@ function DashboardLayoutContent({
       </div>
 
       <SidebarInset>
-        {isMobile && (
-          <div className="flex border-b h-14 items-center justify-between bg-background/95 px-2 backdrop-blur supports-[backdrop-filter]:backdrop-blur sticky top-0 z-40">
-            <div className="flex items-center gap-2">
-              <SidebarTrigger className="h-9 w-9 rounded-lg bg-background" />
-              <div className="flex items-center gap-3">
-                <div className="flex flex-col gap-1">
-                  <span className="tracking-tight text-foreground">
-                    {activeMenuItem?.label ?? "Menu"}
-                  </span>
-                </div>
-              </div>
-            </div>
+        <header className="flex border-b h-16 items-center justify-between bg-background/80 px-4 backdrop-blur supports-[backdrop-filter]:backdrop-blur sticky top-0 z-40 w-full transition-all duration-300">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="h-9 w-9 rounded-lg hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring text-muted-foreground hover:text-foreground" />
+            <div className="h-4 w-[1px] bg-border mx-2" />
+            <span className="font-semibold text-foreground tracking-tight text-lg">
+              {activeMenuItem?.label ?? "Menu"}
+            </span>
           </div>
-        )}
-        <main className="flex-1 p-4">{children}</main>
+
+          <div className="flex items-center gap-3">
+            {toggleTheme && (
+              <button
+                onClick={toggleTheme}
+                className="h-9 w-9 flex items-center justify-center rounded-lg border border-border hover:bg-accent text-muted-foreground hover:text-foreground transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+                title={`Switch to ${theme === "light" ? "Dark" : "Light"} Mode`}
+                aria-label="Toggle Theme"
+              >
+                {theme === "light" ? (
+                  <Moon className="h-[1.1rem] w-[1.1rem] transition-all" />
+                ) : (
+                  <Sun className="h-[1.1rem] w-[1.1rem] transition-all" />
+                )}
+              </button>
+            )}
+          </div>
+        </header>
+        <main className="flex-1 p-6 overflow-y-auto">{children}</main>
       </SidebarInset>
     </>
   );

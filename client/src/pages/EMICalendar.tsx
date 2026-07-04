@@ -54,8 +54,8 @@ export default function EMICalendar() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">EMI Calendar</h1>
-        <p className="text-gray-600 mt-1">Date-wise EMI schedule - when each loan is due</p>
+        <h1 className="text-3xl font-bold text-foreground">EMI Calendar</h1>
+        <p className="text-muted-foreground mt-1">Date-wise EMI schedule - when each loan is due</p>
       </div>
 
       {/* Calendar View */}
@@ -68,33 +68,33 @@ export default function EMICalendar() {
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-blue-600" />
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-lg font-semibold text-foreground">
                         {dateGroup.dueDate}
-                        <span className="text-sm text-gray-500 ml-2">
+                        <span className="text-sm text-muted-foreground ml-2">
                           ({getDayName(dateGroup.dueDate)})
                         </span>
                       </h3>
-                      <p className="text-sm text-gray-600">of every month</p>
+                      <p className="text-sm text-muted-foreground">of every month</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-2xl font-bold text-red-600">₹{dateGroup.totalEMI.toLocaleString()}</div>
-                    <p className="text-xs text-gray-500">{dateGroup.loans.length} loan(s)</p>
+                    <p className="text-xs text-muted-foreground">{dateGroup.loans.length} loan(s)</p>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   {dateGroup.loans.map((loan: any) => (
-                    <div key={loan.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                    <div key={loan.id} className="flex items-center justify-between p-2 bg-muted/40 rounded">
                       <div className="flex-1">
-                        <p className="font-medium text-gray-900 text-sm">{loan.name}</p>
+                        <p className="font-medium text-foreground text-sm">{loan.name}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-semibold text-gray-900 text-sm">
+                        <p className="font-semibold text-foreground text-sm">
                           ₹{parseFloat(loan.monthlyEMI as any).toLocaleString()}
                         </p>
-                        <p className="text-xs text-gray-500">{loan.remainingEMIs} EMI(s)</p>
+                        <p className="text-xs text-muted-foreground">{loan.remainingEMIs} EMI(s)</p>
                       </div>
                     </div>
                   ))}
@@ -106,8 +106,8 @@ export default function EMICalendar() {
           <Card className="md:col-span-2">
             <CardContent className="flex items-center justify-center py-12">
               <div className="text-center">
-                <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600">No loans to display</p>
+                <AlertCircle className="w-12 h-12 text-muted-foreground/60 mx-auto mb-4" />
+                <p className="text-muted-foreground">No loans to display</p>
               </div>
             </CardContent>
           </Card>
@@ -126,17 +126,17 @@ export default function EMICalendar() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Date</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Day</th>
-                    <th className="text-right py-3 px-4 font-semibold text-gray-900">Total EMI</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Loans</th>
+                    <th className="text-left py-3 px-4 font-semibold text-foreground">Date</th>
+                    <th className="text-left py-3 px-4 font-semibold text-foreground">Day</th>
+                    <th className="text-right py-3 px-4 font-semibold text-foreground">Total EMI</th>
+                    <th className="text-left py-3 px-4 font-semibold text-foreground">Loans</th>
                   </tr>
                 </thead>
                 <tbody>
                   {sortedDueDates.map((dateGroup: any, idx: number) => (
-                    <tr key={idx} className="border-b hover:bg-gray-50">
-                      <td className="py-3 px-4 font-medium text-gray-900">{dateGroup.dueDate}</td>
-                      <td className="py-3 px-4 text-gray-600">{getDayName(dateGroup.dueDate)}</td>
+                    <tr key={idx} className="border-b hover:bg-muted/40">
+                      <td className="py-3 px-4 font-medium text-foreground">{dateGroup.dueDate}</td>
+                      <td className="py-3 px-4 text-muted-foreground">{getDayName(dateGroup.dueDate)}</td>
                       <td className="text-right py-3 px-4 font-semibold text-red-600">
                         ₹{dateGroup.totalEMI.toLocaleString()}
                       </td>

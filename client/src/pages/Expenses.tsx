@@ -107,8 +107,8 @@ export default function Expenses() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Expense Tracking</h1>
-          <p className="text-gray-600 mt-1">Monitor and manage your daily expenses</p>
+          <h1 className="text-3xl font-bold text-foreground">Expense Tracking</h1>
+          <p className="text-muted-foreground mt-1">Monitor and manage your daily expenses</p>
         </div>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
@@ -180,24 +180,24 @@ export default function Expenses() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               <TrendingDown className="w-4 h-4" />
               Total Expenses
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-red-600">₹{totalExpenses.toLocaleString()}</div>
-            <p className="text-xs text-gray-500 mt-1">{expenseEntries?.length || 0} entries</p>
+            <p className="text-xs text-muted-foreground mt-1">{expenseEntries?.length || 0} entries</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600">Categories</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Categories</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{Object.keys(expenseByCategory).length}</div>
-            <p className="text-xs text-gray-500 mt-1">Expense categories used</p>
+            <div className="text-2xl font-bold text-foreground">{Object.keys(expenseByCategory).length}</div>
+            <p className="text-xs text-muted-foreground mt-1">Expense categories used</p>
           </CardContent>
         </Card>
       </div>
@@ -211,9 +211,9 @@ export default function Expenses() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {Object.entries(expenseByCategory).map(([category, amount]) => (
-              <div key={category} className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-600">{category}</p>
-                <p className="text-lg font-semibold text-gray-900">₹{(amount as number).toLocaleString()}</p>
+              <div key={category} className="p-3 bg-muted/40 rounded-lg">
+                <p className="text-sm text-muted-foreground">{category}</p>
+                <p className="text-lg font-semibold text-foreground">₹{(amount as number).toLocaleString()}</p>
               </div>
             ))}
           </div>
@@ -245,10 +245,10 @@ export default function Expenses() {
           <div className="space-y-2">
             {filteredExpenses && filteredExpenses.length > 0 ? (
               filteredExpenses.map((expense) => (
-                <div key={expense.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <div key={expense.id} className="flex items-center justify-between p-3 bg-muted/40 rounded-lg hover:bg-muted/60 transition-colors">
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">{expense.category}</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="font-medium text-foreground">{expense.category}</p>
+                    <p className="text-sm text-muted-foreground">
                       {new Date(expense.date).toLocaleDateString()} {expense.notes && `• ${expense.notes}`}
                     </p>
                   </div>
@@ -272,7 +272,7 @@ export default function Expenses() {
                 </div>
               ))
             ) : (
-              <p className="text-center py-8 text-gray-500">No expenses recorded yet. Add one to get started!</p>
+              <p className="text-center py-8 text-muted-foreground">No expenses recorded yet. Add one to get started!</p>
             )}
           </div>
         </CardContent>

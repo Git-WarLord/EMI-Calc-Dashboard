@@ -18,7 +18,7 @@ export default function Dashboard() {
   const { data: monthlyBreakdown } = trpc.dashboard.monthlyBreakdown.useQuery();
 
   const [accountBalanceInput, setAccountBalanceInput] = useState(() => {
-    return localStorage.getItem("manus-account-balance") || "50000";
+    return localStorage.getItem("manus-account-balance") || "0";
   });
 
   const handleBalanceChange = (val: string) => {
@@ -120,54 +120,54 @@ export default function Dashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Financial Dashboard</h1>
-        <p className="text-gray-600 mt-1">Welcome back, {user?.name || "User"}. Here's your financial overview.</p>
+        <h1 className="text-3xl font-bold text-foreground">Financial Dashboard</h1>
+        <p className="text-muted-foreground mt-1">Welcome back, {user?.name || "User"}. Here's your financial overview.</p>
       </div>
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               <CreditCard className="w-4 h-4" />
               Monthly EMI Due
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">₹{Math.round(currentMonthEMIDue).toLocaleString()}</div>
-            <p className="text-xs text-gray-500 mt-1">From {loans?.filter(l => l.status === 'active').length} active loans</p>
+            <div className="text-2xl font-bold text-foreground">₹{Math.round(currentMonthEMIDue).toLocaleString()}</div>
+            <p className="text-xs text-muted-foreground mt-1">From {loans?.filter(l => l.status === 'active').length} active loans</p>
           </CardContent>
         </Card>
 
         <Card className="border-l-4 border-l-red-500">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               <Target className="w-4 h-4" />
               Total Outstanding
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">₹{totalOutstandingEMI.toLocaleString()}</div>
-            <p className="text-xs text-gray-500 mt-1">Across all loans</p>
+            <div className="text-2xl font-bold text-foreground">₹{totalOutstandingEMI.toLocaleString()}</div>
+            <p className="text-xs text-muted-foreground mt-1">Across all loans</p>
           </CardContent>
         </Card>
 
         <Card className="border-l-4 border-l-green-500">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               <DollarSign className="w-4 h-4" />
               Total Income
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">₹{summary?.totalIncome?.toLocaleString()}</div>
-            <p className="text-xs text-gray-500 mt-1">This month</p>
+            <div className="text-2xl font-bold text-foreground">₹{summary?.totalIncome?.toLocaleString()}</div>
+            <p className="text-xs text-muted-foreground mt-1">This month</p>
           </CardContent>
         </Card>
 
         <Card className="border-l-4 border-l-purple-500">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               <TrendingUp className="w-4 h-4" />
               Net Balance
             </CardTitle>
@@ -176,17 +176,17 @@ export default function Dashboard() {
             <div className={`text-2xl font-bold ${summary?.netBalance && summary.netBalance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               ₹{summary?.netBalance?.toLocaleString()}
             </div>
-            <p className="text-xs text-gray-500 mt-1">Income - EMI - Expenses</p>
+            <p className="text-xs text-muted-foreground mt-1">Income - EMI - Expenses</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Account Balance Analysis */}
       <Card className="border shadow-sm">
-        <CardHeader className="pb-3 bg-gray-50 border-b">
+        <CardHeader className="pb-3 bg-muted/40 border-b">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <CardTitle className="text-lg font-bold text-gray-900 flex items-center gap-2">
+              <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-blue-600" />
                 Account Balance & EMI Coverage Analysis ({currentMonthSchedule?.month})
               </CardTitle>
@@ -194,7 +194,7 @@ export default function Dashboard() {
             </div>
             {/* Input field */}
             <div className="flex items-center gap-2 max-w-xs">
-              <label htmlFor="accountBalance" className="text-xs font-semibold text-gray-600 shrink-0">Account Balance (₹):</label>
+              <label htmlFor="accountBalance" className="text-xs font-semibold text-muted-foreground shrink-0">Account Balance (₹):</label>
               <Input
                 id="accountBalance"
                 type="number"
@@ -211,7 +211,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Coverage Timeline List */}
               <div className="space-y-3">
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">EMI Coverage Schedule</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">EMI Coverage Schedule</p>
                 <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
                   {emiCoverageList.map((emi, index) => {
                     const isPaid = emi.status === "paid";
@@ -220,7 +220,7 @@ export default function Dashboard() {
                         key={index} 
                         className={`p-3 rounded-lg border flex items-center justify-between transition-all ${
                           isPaid 
-                            ? "bg-gray-50 border-gray-200 opacity-75" 
+                            ? "bg-muted/40 border-border opacity-75" 
                             : emi.isCovered 
                               ? "bg-green-50/50 border-green-200" 
                               : "bg-red-50/50 border-red-200"
@@ -228,7 +228,7 @@ export default function Dashboard() {
                       >
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="font-semibold text-gray-900">{emi.name}</span>
+                            <span className="font-semibold text-foreground">{emi.name}</span>
                             {isPaid ? (
                               <Badge className="bg-green-100 text-green-800 border-none text-[10px] h-4 px-1.5 hover:bg-green-100">Paid</Badge>
                             ) : emi.isCovered ? (
@@ -237,11 +237,11 @@ export default function Dashboard() {
                               <Badge className="bg-rose-100 text-rose-800 border-none text-[10px] h-4 px-1.5 hover:bg-rose-100">Shortfall</Badge>
                             )}
                           </div>
-                          <p className="text-xs text-gray-600 mt-0.5">Due: {new Date(emi.dueDateStr).toLocaleDateString("en-US", { month: "short", day: "numeric" })} ({emi.dueDate})</p>
+                          <p className="text-xs text-muted-foreground mt-0.5">Due: {new Date(emi.dueDateStr).toLocaleDateString("en-US", { month: "short", day: "numeric" })} ({emi.dueDate})</p>
                         </div>
                         
                         <div className="text-right">
-                          <p className="font-bold text-gray-900">₹{emi.emiAmount.toLocaleString()}</p>
+                          <p className="font-bold text-foreground">₹{emi.emiAmount.toLocaleString()}</p>
                           {!isPaid && (
                             <p className={`text-[11px] font-medium mt-0.5 ${emi.isCovered ? "text-green-700" : "text-red-600"}`}>
                               {emi.isCovered 
@@ -251,7 +251,7 @@ export default function Dashboard() {
                             </p>
                           )}
                           {isPaid && (
-                            <p className="text-[11px] text-gray-400 mt-0.5">Paid on {emi.paidDate ? new Date(emi.paidDate).toLocaleDateString() : "N/A"}</p>
+                            <p className="text-[11px] text-muted-foreground/60 mt-0.5">Paid on {emi.paidDate ? new Date(emi.paidDate).toLocaleDateString() : "N/A"}</p>
                           )}
                         </div>
                       </div>
@@ -261,22 +261,22 @@ export default function Dashboard() {
               </div>
 
               {/* Analysis Summary */}
-              <div className="p-4 bg-gray-50 rounded-xl border flex flex-col justify-between">
+              <div className="p-4 bg-muted/40 rounded-xl border flex flex-col justify-between">
                 <div>
-                  <h4 className="font-bold text-gray-900 text-sm mb-3">Coverage Analysis Summary</h4>
+                  <h4 className="font-bold text-foreground text-sm mb-3">Coverage Analysis Summary</h4>
                   <div className="space-y-2.5 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Initial Balance:</span>
-                      <span className="font-semibold text-gray-900">₹{balance.toLocaleString()}</span>
+                      <span className="text-muted-foreground">Initial Balance:</span>
+                      <span className="font-semibold text-foreground">₹{balance.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Total Unpaid EMIs:</span>
-                      <span className="font-semibold text-gray-900">
+                      <span className="text-muted-foreground">Total Unpaid EMIs:</span>
+                      <span className="font-semibold text-foreground">
                         ₹{emiCoverageList.filter(e => e.status !== "paid").reduce((sum, e) => sum + e.emiAmount, 0).toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between border-t pt-2">
-                      <span className="text-gray-600">Ending Balance:</span>
+                      <span className="text-muted-foreground">Ending Balance:</span>
                       <span className={`font-bold ${runningBalance >= 0 ? "text-green-700" : "text-red-600"}`}>
                         ₹{Math.round(runningBalance).toLocaleString()}
                       </span>
@@ -306,7 +306,7 @@ export default function Dashboard() {
               </div>
             </div>
           ) : (
-            <p className="text-sm text-gray-500 text-center py-4">No EMIs scheduled for this month.</p>
+            <p className="text-sm text-muted-foreground text-center py-4">No EMIs scheduled for this month.</p>
           )}
         </CardContent>
       </Card>
@@ -323,20 +323,20 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 bg-gray-50 rounded-lg border text-center">
-                <div className="text-sm font-medium text-gray-500">Paid EMIs</div>
+              <div className="p-4 bg-muted/40 rounded-lg border text-center">
+                <div className="text-sm font-medium text-muted-foreground">Paid EMIs</div>
                 <div className="text-2xl font-bold text-blue-600 mt-1">{paymentStats.paidCount} / {paymentStats.totalEmis}</div>
-                <div className="text-xs text-gray-500 mt-1">{Math.round(paymentStats.paidRate)}% complete</div>
+                <div className="text-xs text-muted-foreground mt-1">{Math.round(paymentStats.paidRate)}% complete</div>
               </div>
-              <div className="p-4 bg-gray-50 rounded-lg border text-center">
-                <div className="text-sm font-medium text-gray-500">On-Time Rate</div>
+              <div className="p-4 bg-muted/40 rounded-lg border text-center">
+                <div className="text-sm font-medium text-muted-foreground">On-Time Rate</div>
                 <div className="text-2xl font-bold text-green-600 mt-1">{Math.round(paymentStats.onTimeRate)}%</div>
-                <div className="text-xs text-gray-500 mt-1">{paymentStats.onTimeCount} on-time payments</div>
+                <div className="text-xs text-muted-foreground mt-1">{paymentStats.onTimeCount} on-time payments</div>
               </div>
-              <div className={`p-4 rounded-lg border text-center ${paymentStats.overdueCount > 0 ? "bg-red-50 border-red-200" : "bg-gray-50"}`}>
-                <div className="text-sm font-medium text-gray-500">Overdue EMIs</div>
-                <div className={`text-2xl font-bold mt-1 ${paymentStats.overdueCount > 0 ? "text-red-600" : "text-gray-900"}`}>{paymentStats.overdueCount}</div>
-                <div className="text-xs text-gray-500 mt-1">Requires attention</div>
+              <div className={`p-4 rounded-lg border text-center ${paymentStats.overdueCount > 0 ? "bg-red-50 border-red-200" : "bg-muted/40"}`}>
+                <div className="text-sm font-medium text-muted-foreground">Overdue EMIs</div>
+                <div className={`text-2xl font-bold mt-1 ${paymentStats.overdueCount > 0 ? "text-red-600" : "text-foreground"}`}>{paymentStats.overdueCount}</div>
+                <div className="text-xs text-muted-foreground mt-1">Requires attention</div>
               </div>
             </div>
             {paymentStats.overdueCount > 0 && (
@@ -359,7 +359,7 @@ export default function Dashboard() {
                 <span className="text-green-700">On-Time Payments</span>
                 <span>{paymentStats.onTimeCount} ({Math.round(paymentStats.onTimeRate)}%)</span>
               </div>
-              <div className="w-full bg-gray-100 rounded-full h-2">
+              <div className="w-full bg-muted/60 rounded-full h-2">
                 <div
                   className="bg-green-500 h-2 rounded-full"
                   style={{ width: `${paymentStats.onTimeRate}%` }}
@@ -372,7 +372,7 @@ export default function Dashboard() {
                 <span className="text-amber-700">Late Payments</span>
                 <span>{paymentStats.lateCount} ({Math.round(paymentStats.lateRate)}%)</span>
               </div>
-              <div className="w-full bg-gray-100 rounded-full h-2">
+              <div className="w-full bg-muted/60 rounded-full h-2">
                 <div
                   className="bg-amber-500 h-2 rounded-full"
                   style={{ width: `${paymentStats.lateRate}%` }}
@@ -382,10 +382,10 @@ export default function Dashboard() {
 
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-medium">
-                <span className="text-gray-700">Remaining Future EMIs</span>
+                <span className="text-foreground">Remaining Future EMIs</span>
                 <span>{paymentStats.pendingCount}</span>
               </div>
-              <div className="w-full bg-gray-100 rounded-full h-2">
+              <div className="w-full bg-muted/60 rounded-full h-2">
                 <div
                   className="bg-yellow-400 h-2 rounded-full"
                   style={{ width: `${paymentStats.totalEmis > 0 ? (paymentStats.pendingCount / paymentStats.totalEmis) * 100 : 0}%` }}
@@ -456,14 +456,14 @@ export default function Dashboard() {
         <CardContent>
           <div className="space-y-3">
             {loans?.filter(l => l.status === "active").map((loan) => (
-              <div key={loan.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={loan.id} className="flex items-center justify-between p-3 bg-muted/40 rounded-lg">
                 <div className="flex-1">
-                  <p className="font-medium text-gray-900">{loan.name}</p>
-                  <p className="text-sm text-gray-600">Due on {loan.dueDate} of month • Closes in {loan.closesIn}</p>
+                  <p className="font-medium text-foreground">{loan.name}</p>
+                  <p className="text-sm text-muted-foreground">Due on {loan.dueDate} of month • Closes in {loan.closesIn}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-semibold text-gray-900">₹{parseFloat(loan.monthlyEMI as any).toLocaleString()}</p>
-                  <p className="text-sm text-gray-600">{loan.remainingEMIs} EMIs left</p>
+                  <p className="font-semibold text-foreground">₹{parseFloat(loan.monthlyEMI as any).toLocaleString()}</p>
+                  <p className="text-sm text-muted-foreground">{loan.remainingEMIs} EMIs left</p>
                 </div>
               </div>
             ))}

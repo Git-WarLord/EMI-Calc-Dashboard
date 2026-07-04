@@ -82,8 +82,8 @@ export default function MonthlySummary() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Monthly Summary</h1>
-        <p className="text-gray-600 mt-1">View your monthly income, EMI, expenses, and balance</p>
+        <h1 className="text-3xl font-bold text-foreground">Monthly Summary</h1>
+        <p className="text-muted-foreground mt-1">View your monthly income, EMI, expenses, and balance</p>
       </div>
 
       {/* Monthly Cash Flow Chart */}
@@ -119,17 +119,17 @@ export default function MonthlySummary() {
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900">Month</th>
-                  <th className="text-right py-3 px-4 font-semibold text-gray-900">Income</th>
-                  <th className="text-right py-3 px-4 font-semibold text-gray-900">EMI</th>
-                  <th className="text-right py-3 px-4 font-semibold text-gray-900">Expenses</th>
-                  <th className="text-right py-3 px-4 font-semibold text-gray-900">Balance</th>
+                  <th className="text-left py-3 px-4 font-semibold text-foreground">Month</th>
+                  <th className="text-right py-3 px-4 font-semibold text-foreground">Income</th>
+                  <th className="text-right py-3 px-4 font-semibold text-foreground">EMI</th>
+                  <th className="text-right py-3 px-4 font-semibold text-foreground">Expenses</th>
+                  <th className="text-right py-3 px-4 font-semibold text-foreground">Balance</th>
                 </tr>
               </thead>
               <tbody>
                 {chartData.map((row, idx) => (
-                  <tr key={idx} className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4 text-gray-900 font-medium">{row.month}</td>
+                  <tr key={idx} className="border-b hover:bg-muted/40">
+                    <td className="py-3 px-4 text-foreground font-medium">{row.month}</td>
                     <td className="text-right py-3 px-4 text-green-600 font-semibold">₹{row.income.toLocaleString()}</td>
                     <td className="text-right py-3 px-4 text-red-600 font-semibold">₹{row.emi.toLocaleString()}</td>
                     <td className="text-right py-3 px-4 text-orange-600 font-semibold">₹{row.expenses.toLocaleString()}</td>
@@ -148,7 +148,7 @@ export default function MonthlySummary() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600">Total Income</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Total Income</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-600">
@@ -159,7 +159,7 @@ export default function MonthlySummary() {
 
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600">Total EMI</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Total EMI</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-red-600">
@@ -170,7 +170,7 @@ export default function MonthlySummary() {
 
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600">Total Expenses</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Total Expenses</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-orange-600">
@@ -181,7 +181,7 @@ export default function MonthlySummary() {
 
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600">Net Balance</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Net Balance</CardTitle>
           </CardHeader>
           <CardContent>
             <div className={`text-2xl font-bold ${chartData.reduce((sum, m) => sum + m.balance, 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>

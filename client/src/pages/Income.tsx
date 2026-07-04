@@ -102,8 +102,8 @@ export default function Income() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Income Management</h1>
-          <p className="text-gray-600 mt-1">Track all your income sources</p>
+          <h1 className="text-3xl font-bold text-foreground">Income Management</h1>
+          <p className="text-muted-foreground mt-1">Track all your income sources</p>
         </div>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
@@ -175,24 +175,24 @@ export default function Income() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               <DollarSign className="w-4 h-4" />
               Total Income
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-600">₹{totalIncome.toLocaleString()}</div>
-            <p className="text-xs text-gray-500 mt-1">{incomeEntries?.length || 0} entries</p>
+            <p className="text-xs text-muted-foreground mt-1">{incomeEntries?.length || 0} entries</p>
           </CardContent>
         </Card>
 
         {Object.entries(incomeByCategory).map(([category, amount]) => (
           <Card key={category}>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-600">{category}</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">{category}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">₹{(amount as number).toLocaleString()}</div>
+              <div className="text-2xl font-bold text-foreground">₹{(amount as number).toLocaleString()}</div>
             </CardContent>
           </Card>
         ))}
@@ -208,10 +208,10 @@ export default function Income() {
           <div className="space-y-2">
             {incomeEntries && incomeEntries.length > 0 ? (
               incomeEntries.map((income) => (
-                <div key={income.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <div key={income.id} className="flex items-center justify-between p-3 bg-muted/40 rounded-lg hover:bg-muted/60 transition-colors">
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">{income.category}</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="font-medium text-foreground">{income.category}</p>
+                    <p className="text-sm text-muted-foreground">
                       {new Date(income.date).toLocaleDateString()} {income.notes && `• ${income.notes}`}
                     </p>
                   </div>
@@ -235,7 +235,7 @@ export default function Income() {
                 </div>
               ))
             ) : (
-              <p className="text-center py-8 text-gray-500">No income entries yet. Add one to get started!</p>
+              <p className="text-center py-8 text-muted-foreground">No income entries yet. Add one to get started!</p>
             )}
           </div>
         </CardContent>

@@ -34,12 +34,12 @@
     "monthlyEMI": "5646.00",
     "remainingEMIs": 3,
     "totalRemaining": "16938.00",
-    "dueDate": "5th",
+    "dueDate": "6th",
     "closesIn": "Sep 2026",
-    "extraLoan": "0.00",
+    "extraLoan": "0",
     "status": "active",
     "createdAt": "2026-06-23T05:55:36.870Z",
-    "updatedAt": "2026-06-23T05:55:36.870Z"
+    "updatedAt": "2026-07-02T09:55:13.287Z"
   },
   {
     "id": 4,
@@ -118,12 +118,12 @@
     "monthlyEMI": "2000.00",
     "remainingEMIs": 1,
     "totalRemaining": "2000.00",
-    "dueDate": "3rd",
+    "dueDate": "8th",
     "closesIn": "Jul 2026",
     "extraLoan": "0",
     "status": "active",
     "createdAt": "2026-06-23T05:55:36.870Z",
-    "updatedAt": "2026-06-23T06:03:13.073Z"
+    "updatedAt": "2026-06-30T11:09:11.611Z"
   },
   {
     "id": 10,

@@ -94,8 +94,8 @@ export default function EMITimeline() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">EMI Timeline</h1>
-        <p className="text-gray-600 mt-1">Accurate month-by-month EMI schedule showing payment statuses and outflow tracker.</p>
+        <h1 className="text-3xl font-bold text-foreground">EMI Timeline</h1>
+        <p className="text-muted-foreground mt-1">Accurate month-by-month EMI schedule showing payment statuses and outflow tracker.</p>
       </div>
 
       {/* Timeline View */}
@@ -108,8 +108,8 @@ export default function EMITimeline() {
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-blue-600" />
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">{monthData.month}</h3>
-                      <p className="text-sm text-gray-600">
+                      <h3 className="text-lg font-semibold text-foreground">{monthData.month}</h3>
+                      <p className="text-sm text-muted-foreground">
                         {monthData.loanCount} EMI(s) due •{" "}
                         <span className="text-green-600 font-medium">₹{monthData.paidEMI.toLocaleString()} Paid</span>
                         {monthData.overdueEMI > 0 && (
@@ -120,7 +120,7 @@ export default function EMITimeline() {
                   </div>
                   <div className="text-right">
                     <div className="text-3xl font-bold text-red-600 font-mono">₹{monthData.totalEMI.toLocaleString()}</div>
-                    <p className="text-xs text-gray-500">Total needed</p>
+                    <p className="text-xs text-muted-foreground">Total needed</p>
                   </div>
                 </div>
               </CardHeader>
@@ -131,10 +131,10 @@ export default function EMITimeline() {
                     const isOverdue = loanEntry.status === "overdue";
                     
                     return (
-                      <div key={`${loanEntry.loanId}-${loanIdx}`} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-transparent rounded-lg border border-gray-200 gap-3">
+                      <div key={`${loanEntry.loanId}-${loanIdx}`} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-transparent rounded-lg border border-border gap-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
-                            <p className="font-semibold text-gray-900">{loanEntry.name}</p>
+                            <p className="font-semibold text-foreground">{loanEntry.name}</p>
                             {isPaid ? (
                               <Badge className="bg-green-50 text-green-700 border-green-200 hover:bg-green-50 text-xs">
                                 Paid
@@ -154,17 +154,17 @@ export default function EMITimeline() {
                               </Badge>
                             )}
                           </div>
-                          <p className="text-sm text-gray-600 mt-0.5">
+                          <p className="text-sm text-muted-foreground mt-0.5">
                             Due on {loanEntry.dueDate} of the month ({new Date(loanEntry.dueDateStr).toLocaleDateString()})
                             {isPaid && loanEntry.paidDate && (
-                              <span className="text-xs text-gray-500 block sm:inline sm:ml-2">
+                              <span className="text-xs text-muted-foreground block sm:inline sm:ml-2">
                                 • Paid on {new Date(loanEntry.paidDate).toLocaleDateString()}
                               </span>
                             )}
                           </p>
                         </div>
                         <div className="flex items-center justify-between sm:justify-end gap-4">
-                          <p className="font-bold text-gray-900">₹{loanEntry.emiAmount.toLocaleString()}</p>
+                          <p className="font-bold text-foreground">₹{loanEntry.emiAmount.toLocaleString()}</p>
                           {isPaid ? (
                             <Button
                               variant="outline"
@@ -197,8 +197,8 @@ export default function EMITimeline() {
           <Card>
             <CardContent className="flex items-center justify-center py-12">
               <div className="text-center">
-                <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600">No loans to display</p>
+                <AlertCircle className="w-12 h-12 text-muted-foreground/60 mx-auto mb-4" />
+                <p className="text-muted-foreground">No loans to display</p>
               </div>
             </CardContent>
           </Card>
@@ -251,7 +251,7 @@ export default function EMITimeline() {
                   id="timelineDueDateField"
                   value={selectedEmi ? new Date(selectedEmi.dueDateStr).toLocaleDateString() : ""}
                   disabled
-                  className="bg-gray-50 text-gray-600"
+                  className="bg-muted/40 text-muted-foreground"
                 />
               </div>
 
@@ -310,16 +310,16 @@ export default function EMITimeline() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Month</th>
-                    <th className="text-center py-3 px-4 font-semibold text-gray-900">EMIs Due</th>
-                    <th className="text-right py-3 px-4 font-semibold text-gray-900">Total Amount</th>
+                  <tr className="border-b bg-muted/40">
+                    <th className="text-left py-3 px-4 font-semibold text-foreground">Month</th>
+                    <th className="text-center py-3 px-4 font-semibold text-foreground">EMIs Due</th>
+                    <th className="text-right py-3 px-4 font-semibold text-foreground">Total Amount</th>
                   </tr>
                 </thead>
                 <tbody>
                   {monthlyEMIData.map((monthData, idx) => (
-                    <tr key={idx} className="border-b hover:bg-gray-50">
-                      <td className="py-3 px-4 font-medium text-gray-900">{monthData.month}</td>
+                    <tr key={idx} className="border-b hover:bg-muted/40">
+                      <td className="py-3 px-4 font-medium text-foreground">{monthData.month}</td>
                       <td className="text-center py-3 px-4">
                         <Badge variant="secondary">{monthData.loanCount}</Badge>
                       </td>

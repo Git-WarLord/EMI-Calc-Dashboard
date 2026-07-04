@@ -67,8 +67,8 @@ export default function MonthlyBreakdown() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Monthly Breakdown</h1>
-        <p className="text-gray-600 mt-1">Total EMI and expenses required each month - real-time data</p>
+        <h1 className="text-3xl font-bold text-foreground">Monthly Breakdown</h1>
+        <p className="text-muted-foreground mt-1">Total EMI and expenses required each month - real-time data</p>
       </div>
 
       {/* Key Metrics */}
@@ -76,7 +76,7 @@ export default function MonthlyBreakdown() {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center">
-              <p className="text-sm text-gray-600 font-medium">Total EMI</p>
+              <p className="text-sm text-muted-foreground font-medium">Total EMI</p>
               <p className="text-3xl font-bold text-red-600 mt-2">₹{totalEMI.toLocaleString()}</p>
             </div>
           </CardContent>
@@ -84,7 +84,7 @@ export default function MonthlyBreakdown() {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center">
-              <p className="text-sm text-gray-600 font-medium">Total Expenses</p>
+              <p className="text-sm text-muted-foreground font-medium">Total Expenses</p>
               <p className="text-3xl font-bold text-orange-600 mt-2">₹{totalExpenses.toLocaleString()}</p>
             </div>
           </CardContent>
@@ -92,7 +92,7 @@ export default function MonthlyBreakdown() {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center">
-              <p className="text-sm text-gray-600 font-medium">Total Required</p>
+              <p className="text-sm text-muted-foreground font-medium">Total Required</p>
               <p className="text-3xl font-bold text-blue-600 mt-2">₹{totalRequired.toLocaleString()}</p>
             </div>
           </CardContent>
@@ -100,7 +100,7 @@ export default function MonthlyBreakdown() {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center">
-              <p className="text-sm text-gray-600 font-medium">Months Tracked</p>
+              <p className="text-sm text-muted-foreground font-medium">Months Tracked</p>
               <p className="text-3xl font-bold text-green-600 mt-2">{monthlyBreakdown.length}</p>
             </div>
           </CardContent>
@@ -163,18 +163,18 @@ export default function MonthlyBreakdown() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b bg-gray-50">
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900">Month</th>
-                  <th className="text-right py-3 px-4 font-semibold text-gray-900">Total EMI</th>
-                  <th className="text-right py-3 px-4 font-semibold text-gray-900">Expenses</th>
-                  <th className="text-right py-3 px-4 font-semibold text-gray-900">Total Required</th>
-                  <th className="text-center py-3 px-4 font-semibold text-gray-900">Expense Count</th>
+                <tr className="border-b bg-muted/40">
+                  <th className="text-left py-3 px-4 font-semibold text-foreground">Month</th>
+                  <th className="text-right py-3 px-4 font-semibold text-foreground">Total EMI</th>
+                  <th className="text-right py-3 px-4 font-semibold text-foreground">Expenses</th>
+                  <th className="text-right py-3 px-4 font-semibold text-foreground">Total Required</th>
+                  <th className="text-center py-3 px-4 font-semibold text-foreground">Expense Count</th>
                 </tr>
               </thead>
               <tbody>
                 {monthlyBreakdown.map((monthData, idx) => (
-                  <tr key={idx} className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4 font-medium text-gray-900">{monthData.month}</td>
+                  <tr key={idx} className="border-b hover:bg-muted/40">
+                    <td className="py-3 px-4 font-medium text-foreground">{monthData.month}</td>
                     <td className="text-right py-3 px-4 font-semibold text-red-600">
                       ₹{monthData.totalEMI.toLocaleString()}
                     </td>
@@ -188,7 +188,7 @@ export default function MonthlyBreakdown() {
                       {monthData.expenseCount > 0 ? (
                         <Badge variant="secondary">{monthData.expenseCount}</Badge>
                       ) : (
-                        <span className="text-gray-400">-</span>
+                        <span className="text-muted-foreground/60">-</span>
                       )}
                     </td>
                   </tr>
