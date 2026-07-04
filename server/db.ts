@@ -21,15 +21,21 @@ export async function getDb() {
 }
 
 // File-based persistence configuration for fallback mode
-const DATA_DIR = path.join(process.cwd(), "server", "data");
+const DATA_DIR = path.join(import.meta.dirname, "data");
 
 function readDataFile<T>(filename: string, defaultValue: T): T {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+  } catch (e) {
+    // Ignore read-only filesystem errors on Vercel
   }
   const filePath = path.join(DATA_DIR, filename);
   if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, JSON.stringify(defaultValue, null, 2), "utf8");
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(defaultValue, null, 2), "utf8");
+    } catch (e) {}
     return defaultValue;
   }
   try {
@@ -42,11 +48,15 @@ function readDataFile<T>(filename: string, defaultValue: T): T {
 }
 
 function writeDataFile<T>(filename: string, data: T): void {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    const filePath = path.join(DATA_DIR, filename);
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+  } catch (e) {
+    console.warn(`[Database] Could not write to ${filename} (read-only filesystem?)`);
   }
-  const filePath = path.join(DATA_DIR, filename);
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
 }
 
 const initialMockLoans: any[] = [
