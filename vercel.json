@@ -1,13 +1,17 @@
 {
   "functions": {
-    "api/[...path].ts": {
+    "api/index.ts": {
       "includeFiles": "server/data/*.json"
     }
   },
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    },
+    {
       "source": "/app-auth(.*)",
-      "destination": "/api/app-auth$1"
+      "destination": "/api"
     },
     {
       "source": "/(.*)",
