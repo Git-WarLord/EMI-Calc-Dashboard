@@ -70,11 +70,11 @@ function writeDataFile<T>(filename: string, data: T): void {
   }
 }
 
-import initialMockLoansData from "./data/loans.json";
-import initialIncomeData from "./data/income.json";
-import initialExpensesData from "./data/expenses.json";
-import initialEmiHistoryData from "./data/emi_history.json";
-import initialMonthlySummaryData from "./data/monthly_summary.json";
+import initialMockLoansData from "./data/loansData";
+import initialIncomeData from "./data/incomeData";
+import initialExpensesData from "./data/expensesData";
+import initialEmiHistoryData from "./data/emiHistoryData";
+import initialMonthlySummaryData from "./data/monthlySummaryData";
 
 const initialMockLoans: any[] = initialMockLoansData;
 
