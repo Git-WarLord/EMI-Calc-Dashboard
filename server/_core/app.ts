@@ -14,9 +14,18 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 registerStorageProxy(app);
 registerOAuthRoutes(app);
 
-// tRPC API
+// tRPC API (Local dev)
 app.use(
   "/api/trpc",
+  createExpressMiddleware({
+    router: appRouter,
+    createContext,
+  })
+);
+
+// tRPC API (Vercel Serverless Function strips the /api prefix)
+app.use(
+  "/trpc",
   createExpressMiddleware({
     router: appRouter,
     createContext,
