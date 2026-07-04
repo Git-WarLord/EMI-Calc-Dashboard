@@ -13,7 +13,8 @@ export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
       if (!process.env.DATABASE_URL.startsWith('mysql')) {
-        throw new Error("DATABASE_URL is not a mysql:// connection string");
+        console.warn("[Database] DATABASE_URL is not a mysql:// connection string. Falling back to mock data.");
+        return null;
       }
       _db = drizzle(process.env.DATABASE_URL);
       
