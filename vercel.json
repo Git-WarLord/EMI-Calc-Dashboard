@@ -1,20 +1,7 @@
 {
-  "functions": {
-    "api/index.ts": {
-      "includeFiles": "server/data/*.json"
-    }
-  },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api"
-    },
-    {
-      "source": "/app-auth(.*)",
-      "destination": "/api"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!api|trpc).*)$",
       "destination": "/index.html"
     }
   ]
