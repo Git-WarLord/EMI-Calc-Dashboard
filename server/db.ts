@@ -11,9 +11,19 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
+      if (!process.env.DATABASE_URL.startsWith('mysql')) {
+        throw new Error("DATABASE_URL is not a mysql:// connection string");
+      }
       _db = drizzle(process.env.DATABASE_URL);
+      
+      // Perform a simple query with a 2-second timeout to prevent Vercel 504 timeouts
+      const checkPromise = _db.select({ id: users.id }).from(users).limit(1);
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error("Database connection timeout")), 2000)
+      );
+      await Promise.race([checkPromise, timeoutPromise]);
     } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
+      console.warn("[Database] Failed to connect, falling back to mock data:", error);
       _db = null;
     }
   }
