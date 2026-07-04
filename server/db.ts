@@ -1,4 +1,5 @@
 import { eq, and } from "drizzle-orm";
+import "mysql2"; // Force Vercel to trace mysql2 dependency
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertUser, users, loans, income, expenses, emiHistory, monthlySummary } from "../drizzle/schema";
 import { ENV } from './_core/env';
