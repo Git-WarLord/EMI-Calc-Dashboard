@@ -21,7 +21,7 @@ export async function getDb() {
 }
 
 // File-based persistence configuration for fallback mode
-const DATA_DIR = path.join(import.meta.dirname, "data");
+const DATA_DIR = path.join(process.cwd(), "server", "data");
 
 function readDataFile<T>(filename: string, defaultValue: T): T {
   try {
@@ -59,148 +59,13 @@ function writeDataFile<T>(filename: string, data: T): void {
   }
 }
 
-const initialMockLoans: any[] = [
-  {
-    id: 1,
-    userId: 1,
-    name: 'OneCard (CC)',
-    monthlyEMI: "4125.00",
-    remainingEMIs: 5,
-    totalRemaining: "20625.00",
-    dueDate: '9th',
-    closesIn: 'Nov 2026',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 2,
-    userId: 1,
-    name: 'OneCard Fridge',
-    monthlyEMI: "2708.00",
-    remainingEMIs: 4,
-    totalRemaining: "10832.00",
-    dueDate: '9th',
-    closesIn: 'Oct 2026',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 3,
-    userId: 1,
-    name: 'Fibe',
-    monthlyEMI: "5646.00",
-    remainingEMIs: 3,
-    totalRemaining: "16938.00",
-    dueDate: '5th',
-    closesIn: 'Sep 2026',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 4,
-    userId: 1,
-    name: 'KreditBee',
-    monthlyEMI: "4651.00",
-    remainingEMIs: 10,
-    totalRemaining: "46510.00",
-    dueDate: '8th',
-    closesIn: 'Apr 2027',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 5,
-    userId: 1,
-    name: 'Kotak Mahindra',
-    monthlyEMI: "4649.00",
-    remainingEMIs: 5,
-    totalRemaining: "23245.00",
-    dueDate: '5th',
-    closesIn: 'Nov 2026',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 6,
-    userId: 1,
-    name: 'mPokket',
-    monthlyEMI: "1893.00",
-    remainingEMIs: 6,
-    totalRemaining: "11358.00",
-    dueDate: '2nd',
-    closesIn: 'Dec 2026',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 7,
-    userId: 1,
-    name: 'mMoney',
-    monthlyEMI: "12910.00",
-    remainingEMIs: 1,
-    totalRemaining: "12910.00",
-    dueDate: '5th',
-    closesIn: 'Jul 2026',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 8,
-    userId: 1,
-    name: 'Navi',
-    monthlyEMI: "4300.00",
-    remainingEMIs: 16,
-    totalRemaining: "68800.00",
-    dueDate: '1st',
-    closesIn: 'Oct 2027',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 9,
-    userId: 1,
-    name: 'Bike extra loan',
-    monthlyEMI: "2000.00",
-    remainingEMIs: 1,
-    totalRemaining: "2000.00",
-    dueDate: '3rd',
-    closesIn: 'Jul 2026',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 10,
-    userId: 1,
-    name: 'Bike',
-    monthlyEMI: "7818.00",
-    remainingEMIs: 24,
-    totalRemaining: "187632.00",
-    dueDate: '3rd',
-    closesIn: 'Jun 2028',
-    extraLoan: "0.00",
-    status: "active",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-];
+import initialMockLoansData from "./data/loans.json";
+import initialIncomeData from "./data/income.json";
+import initialExpensesData from "./data/expenses.json";
+import initialEmiHistoryData from "./data/emi_history.json";
+import initialMonthlySummaryData from "./data/monthly_summary.json";
+
+const initialMockLoans: any[] = initialMockLoansData;
 
 const mockLoans: any[] = readDataFile("loans.json", initialMockLoans).map((l: any) => ({
   ...l,
@@ -208,21 +73,21 @@ const mockLoans: any[] = readDataFile("loans.json", initialMockLoans).map((l: an
   updatedAt: new Date(l.updatedAt),
 }));
 
-const mockIncome: any[] = readDataFile("income.json", []).map((i: any) => ({
+const mockIncome: any[] = readDataFile("income.json", initialIncomeData).map((i: any) => ({
   ...i,
   date: new Date(i.date),
   createdAt: new Date(i.createdAt),
   updatedAt: new Date(i.updatedAt),
 }));
 
-const mockExpenses: any[] = readDataFile("expenses.json", []).map((e: any) => ({
+const mockExpenses: any[] = readDataFile("expenses.json", initialExpensesData).map((e: any) => ({
   ...e,
   date: new Date(e.date),
   createdAt: new Date(e.createdAt),
   updatedAt: new Date(e.updatedAt),
 }));
 
-const mockEmiHistory: any[] = readDataFile("emi_history.json", []).map((h: any) => ({
+const mockEmiHistory: any[] = readDataFile("emi_history.json", initialEmiHistoryData).map((h: any) => ({
   ...h,
   dueDate: new Date(h.dueDate),
   paidDate: h.paidDate ? new Date(h.paidDate) : null,
@@ -230,7 +95,7 @@ const mockEmiHistory: any[] = readDataFile("emi_history.json", []).map((h: any) 
   updatedAt: new Date(h.updatedAt),
 }));
 
-const mockMonthlySummary: any[] = readDataFile("monthly_summary.json", []).map((s: any) => ({
+const mockMonthlySummary: any[] = readDataFile("monthly_summary.json", initialMonthlySummaryData).map((s: any) => ({
   ...s,
   createdAt: new Date(s.createdAt),
   updatedAt: new Date(s.updatedAt),
